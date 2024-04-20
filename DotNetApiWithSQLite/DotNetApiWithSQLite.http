@@ -1,0 +1,6 @@
+@DotNetApiWithSQLite_HostAddress = http://localhost:5245
+
+GET {{DotNetApiWithSQLite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
