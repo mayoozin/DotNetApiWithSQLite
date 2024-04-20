@@ -1,7 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //Console.WriteLine("Hello, World!");
 
-using SQLiteWithConsoleApp;
 using System;
 using System.Data;
 using System.Data.SQLite;
@@ -27,10 +26,12 @@ class Program
             connection.Close();
         }
 
-        SQLiteDbQuery sQLiteDbQuery = new SQLiteDbQuery();
+        SQLiteServices sQLiteDbQuery = new SQLiteServices();
         sQLiteDbQuery.CreateTable(connection);
         sQLiteDbQuery.Insert(connection);
         sQLiteDbQuery.Select(connection);
+        sQLiteDbQuery.Update(connection);
+        sQLiteDbQuery.Delete(connection);
 
     }
 }

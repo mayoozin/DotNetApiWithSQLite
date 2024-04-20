@@ -82,5 +82,56 @@ namespace SQLiteWithConsoleApp
                 connection.Close();
             }
         }
+
+        public void Update(SQLiteConnection connection)
+        {
+            string updateSql = "UPDATE users SET email = @newEmail WHERE name = @name";
+            SQLiteCommand updateCommand = new SQLiteCommand(updateSql, connection);
+
+            // Parameters
+            updateCommand.Parameters.AddWithValue("@newEmail", "updated@example.com");
+            updateCommand.Parameters.AddWithValue("@name", "John Doe");
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = updateCommand.ExecuteNonQuery();
+                Console.WriteLine($"Updated {rowsAffected} row(s)!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        public void Delete(SQLiteConnection connection)
+        {
+            string deleteSql = "DELETE FROM users WHERE name = @name";
+            SQLiteCommand deleteCommand = new SQLiteCommand(deleteSql, connection);
+
+            // Parameter
+            deleteCommand.Parameters.AddWithValue("@name", "John Doe");
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = deleteCommand.ExecuteNonQuery();
+                Console.WriteLine($"Deleted {rowsAffected} row(s)!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
     }
 }
