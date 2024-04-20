@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //Console.WriteLine("Hello, World!");
 
+using SQLiteWithConsoleApp;
 using System;
 using System.Data;
 using System.Data.SQLite;

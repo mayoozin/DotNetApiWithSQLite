@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SQLiteWithConsoleApp
 {
-    public class SQLiteDbQuery
+    public class SQLiteServices
     {
         public void CreateTable(SQLiteConnection connection)
         {
