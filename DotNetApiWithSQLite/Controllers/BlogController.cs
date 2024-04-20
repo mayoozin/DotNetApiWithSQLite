@@ -9,7 +9,15 @@ namespace DotNetApiWithSQLite.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        private readonly IBlogService blogService;
+        private readonly ILogger<BlogController> _logger;
+        private readonly IBlogService _blogService;
+
+        public BlogController(ILogger<BlogController> logger, IBlogService blogService)
+        {
+            _logger = logger;
+            _blogService = blogService;
+        }
+
 
         // GET: api/<BlogController>
         [HttpGet]
