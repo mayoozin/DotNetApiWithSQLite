@@ -27,6 +27,12 @@ namespace DotNetApiWithSQLite.Controllers
             return Ok(await _blogService.CreateBlogTable());
         }
 
+        [HttpPost("Insert")]
+        public async Task<IActionResult> Insert(BlogModel requestModel)
+        {
+            return Ok(await _blogService.Create(requestModel));
+        }
+
         // GET: api/<BlogController>
         [HttpGet]
         public async Task<IEnumerable<BlogDataModel>> Get()
