@@ -35,7 +35,7 @@ namespace DotNetApiWithSQLite.Controllers
 
         // GET: api/<BlogController>
         [HttpGet]
-        public async Task<IEnumerable<BlogDataModel>> Get()
+        public async Task<IEnumerable<BlogModel>> Get()
         {
 
             var model = await _blogService.GetAll();
