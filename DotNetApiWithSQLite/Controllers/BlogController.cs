@@ -1,4 +1,7 @@
-﻿using DotNetApiWithSQLite.Services;
+﻿using DotNetApiWithSQLite.DbServices;
+using DotNetApiWithSQLite.Model;
+using DotNetApiWithSQLite.Queries;
+using DotNetApiWithSQLite.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,20 +13,27 @@ namespace DotNetApiWithSQLite.Controllers
     public class BlogController : ControllerBase
     {
         private readonly ILogger<BlogController> _logger;
-        private readonly IBlogService _blogService;
+        private readonly BlogService _blogService;
 
-        public BlogController(ILogger<BlogController> logger, IBlogService blogService)
+        public BlogController(ILogger<BlogController> logger, BlogService blogService)
         {
             _logger = logger;
             _blogService = blogService;
         }
 
+        [HttpGet("CreateTable")]
+        public async Task<IActionResult> CreateBlogTable()
+        {
+            return Ok(await _blogService.CreateBlogTable());
+        }
 
         // GET: api/<BlogController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<BlogDataModel>> Get()
         {
-            return new string[] { "value1", "value2" };
+
+            var model = await _blogService.GetAll();
+            return model;
         }
 
         // GET api/<BlogController>/5
