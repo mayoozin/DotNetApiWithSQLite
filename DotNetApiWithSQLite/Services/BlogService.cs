@@ -2,7 +2,9 @@
 using DotNetApiWithSQLite.DbServices;
 using DotNetApiWithSQLite.Model;
 using DotNetApiWithSQLite.Queries;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace DotNetApiWithSQLite.Services
 {
@@ -17,13 +19,13 @@ namespace DotNetApiWithSQLite.Services
             _sQLiteDbContextService = sQLiteDbContextService;
         }
 
-
-        public Task Create(BlogCreateRequestModel model)
+        [HttpPost]
+        public async Task<int> Create(BlogModel requestModel)
         {
-            throw new NotImplementedException();
+            var res = _sQLiteDbContextService.Execute(SQLiteDbQuery.Insert, requestModel);
+            return res;
         }
 
-        [HttpGet("CreateTable")]
         public async Task<int> CreateBlogTable()
         {
             int res = _sQLiteDbContextService.Execute(SQLiteDbQuery.CreateBlogTable);
