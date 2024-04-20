@@ -19,7 +19,6 @@ namespace DotNetApiWithSQLite.Services
             _sQLiteDbContextService = sQLiteDbContextService;
         }
 
-        [HttpPost]
         public async Task<int> Create(BlogModel requestModel)
         {
             var res = _sQLiteDbContextService.Execute(SQLiteDbQuery.Insert, requestModel);
@@ -37,9 +36,9 @@ namespace DotNetApiWithSQLite.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<BlogDataModel>> GetAll()
+        public async Task<IEnumerable<BlogModel>> GetAll()
         {
-            var model = _sQLiteDbContextService.Query<BlogDataModel>(SQLiteDbQuery.GetAll);
+            var model = _sQLiteDbContextService.Query<BlogModel>(SQLiteDbQuery.GetAll);
             return model;
         }
 
