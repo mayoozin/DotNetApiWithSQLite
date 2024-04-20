@@ -34,6 +34,7 @@ namespace DotNetApiWithSQLite.DbServices
             var lst = JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(dt));
             return lst!;
         }
+
         public int Execute(string query, object? parameters = null)
         {
             SQLiteCommand cmd = new SQLiteCommand(query, _connection);
@@ -46,6 +47,7 @@ namespace DotNetApiWithSQLite.DbServices
             _connection.Close();
             return result;
         }
+
         public List<SQLiteParameter> GetParameters<T>(T obj)
         {
             List<SQLiteParameter> sQLiteParameters = new List<SQLiteParameter>();
