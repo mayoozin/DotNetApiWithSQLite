@@ -34,6 +34,30 @@ namespace DotNetApiWithSQLite.DbServices
             var lst = JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(dt));
             return lst!;
         }
+        public async Task<List<T>> QueryAsync<T>(string query, object? parameters = null)
+        {
+            await _connection.OpenAsync();
+            try
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                {
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(GetParameters(parameters).ToArray());
+                    }
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    var lst = JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(dt));
+                    return lst!;
+                }
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
 
         public int Execute(string query, object? parameters = null)
         {
