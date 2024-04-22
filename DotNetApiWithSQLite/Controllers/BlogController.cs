@@ -39,6 +39,12 @@ namespace DotNetApiWithSQLite.Controllers
             return Ok(await _blogService.Update(requestModel));
         }
 
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(BlogModel requestModel)
+        {
+            return Ok(await _blogService.Delete(requestModel));
+        }
+
         // GET: api/<BlogController>
         [HttpGet]
         public async Task<IEnumerable<BlogModel>> Get()

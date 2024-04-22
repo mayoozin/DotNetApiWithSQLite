@@ -31,9 +31,10 @@ namespace DotNetApiWithSQLite.Services
             return res;
         }
 
-        public Task Delete(int id)
+        public async Task<int> Delete(BlogModel reqModel)
         {
-            throw new NotImplementedException();
+            int res = await _sQLiteDbContextService.ExecuteAsync(SQLiteDbQuery.Delete, reqModel);
+            return res;
         }
 
         public async Task<IEnumerable<BlogModel>> GetAll()
