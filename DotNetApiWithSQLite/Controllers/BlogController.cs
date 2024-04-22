@@ -33,38 +33,18 @@ namespace DotNetApiWithSQLite.Controllers
             return Ok(await _blogService.Create(requestModel));
         }
 
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(BlogModel requestModel)
+        {
+            return Ok(await _blogService.Update(requestModel));
+        }
+
         // GET: api/<BlogController>
         [HttpGet]
         public async Task<IEnumerable<BlogModel>> Get()
         {
-
             var model = await _blogService.GetAll();
             return model;
-        }
-
-        // GET api/<BlogController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<BlogController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<BlogController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BlogController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
