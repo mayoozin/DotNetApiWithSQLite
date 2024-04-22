@@ -38,7 +38,7 @@ namespace DotNetApiWithSQLite.Services
 
         public async Task<IEnumerable<BlogModel>> GetAll()
         {
-            var model = _sQLiteDbContextService.Query<BlogModel>(SQLiteDbQuery.GetAll);
+            var model = await _sQLiteDbContextService.QueryAsync<BlogModel>(SQLiteDbQuery.GetAll);
             return model;
         }
 
@@ -47,9 +47,8 @@ namespace DotNetApiWithSQLite.Services
             throw new NotImplementedException();
         }
 
-        public async Task<int> Update(string id, BlogModel updateReqModel)
+        public async Task<int> Update(BlogModel updateReqModel)
         {
-            updateReqModel.BlogId = id;
             int res = await _sQLiteDbContextService.ExecuteAsync(SQLiteDbQuery.Update, updateReqModel);
             return res;
         }
