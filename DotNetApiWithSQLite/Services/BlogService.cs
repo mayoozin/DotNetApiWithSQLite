@@ -21,13 +21,13 @@ namespace DotNetApiWithSQLite.Services
 
         public async Task<int> Create(BlogModel requestModel)
         {
-            var res = _sQLiteDbContextService.Execute(SQLiteDbQuery.Insert, requestModel);
+            var res = await _sQLiteDbContextService.ExecuteAsync(SQLiteDbQuery.Insert, requestModel);
             return res;
         }
 
         public async Task<int> CreateBlogTable()
         {
-            int res = _sQLiteDbContextService.Execute(SQLiteDbQuery.CreateBlogTable);
+            int res = await _sQLiteDbContextService.ExecuteAsync(SQLiteDbQuery.CreateBlogTable);
             return res;
         }
 
@@ -47,9 +47,11 @@ namespace DotNetApiWithSQLite.Services
             throw new NotImplementedException();
         }
 
-        public Task Update(int id, BlogUpdateRequestModel model)
+        public async Task<int> Update(string id, BlogModel updateReqModel)
         {
-            throw new NotImplementedException();
+            updateReqModel.BlogId = id;
+            int res = await _sQLiteDbContextService.ExecuteAsync(SQLiteDbQuery.Update, updateReqModel);
+            return res;
         }
     }
 }
