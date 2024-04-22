@@ -48,6 +48,28 @@ namespace DotNetApiWithSQLite.DbServices
             return result;
         }
 
+        public async Task<int> ExecuteAsync(string query, object? parameters = null)
+        {
+            await _connection.OpenAsync();
+            try
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
+                {
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(GetParameters(parameters).ToArray());
+                    }
+                    var result = await cmd.ExecuteNonQueryAsync();
+                    return result;
+                }
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+
+
         public List<SQLiteParameter> GetParameters<T>(T obj)
         {
             List<SQLiteParameter> sQLiteParameters = new List<SQLiteParameter>();
